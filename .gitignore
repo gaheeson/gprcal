@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+venv/
+.venv/
+env/
+
+# Output files
+*.npy
+*.png
+*.pdf
+*.svg
+
+# DICOM data (may contain PHI)
+*.dcm
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
