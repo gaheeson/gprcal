@@ -8,6 +8,7 @@ Run:
     python gprcal_gui.py
 """
 
+import os
 import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
@@ -28,8 +29,10 @@ class GammaCalcGUI:
         root.resizable(True, True)
         root.minsize(580, 660)
 
-        self._ref_path  = tk.StringVar()
-        self._eval_path = tk.StringVar()
+        self._ref_path       = tk.StringVar()   # full path (internal)
+        self._eval_path      = tk.StringVar()   # full path (internal)
+        self._ref_display    = tk.StringVar()   # basename only (shown in UI)
+        self._eval_display   = tk.StringVar()   # basename only (shown in UI)
 
         self._dd        = tk.DoubleVar(value=3.0)
         self._dta       = tk.DoubleVar(value=3.0)
@@ -68,14 +71,16 @@ class GammaCalcGUI:
 
         ttk.Label(file_frame, text="Reference (.dcm):").grid(
             row=0, column=0, sticky="w", padx=6, pady=3)
-        ttk.Entry(file_frame, textvariable=self._ref_path).grid(
+        ttk.Entry(file_frame, textvariable=self._ref_display,
+                  state="readonly").grid(
             row=0, column=1, sticky="ew", padx=4, pady=3)
         ttk.Button(file_frame, text="Browse…",
                    command=self._browse_ref).grid(row=0, column=2, padx=6, pady=3)
 
         ttk.Label(file_frame, text="Evaluation (.dcm):").grid(
             row=1, column=0, sticky="w", padx=6, pady=3)
-        ttk.Entry(file_frame, textvariable=self._eval_path).grid(
+        ttk.Entry(file_frame, textvariable=self._eval_display,
+                  state="readonly").grid(
             row=1, column=1, sticky="ew", padx=4, pady=3)
         ttk.Button(file_frame, text="Browse…",
                    command=self._browse_eval).grid(row=1, column=2, padx=6, pady=3)
@@ -220,6 +225,7 @@ class GammaCalcGUI:
         )
         if p:
             self._ref_path.set(p)
+            self._ref_display.set(os.path.basename(p))
 
     def _browse_eval(self):
         p = filedialog.askopenfilename(
@@ -228,6 +234,7 @@ class GammaCalcGUI:
         )
         if p:
             self._eval_path.set(p)
+            self._eval_display.set(os.path.basename(p))
 
     # ── Run (threaded) ────────────────────────────────────────────────────────
 
@@ -254,11 +261,11 @@ class GammaCalcGUI:
     def _run_worker(self, ref_path, eval_path):
         import time
         try:
-            self._log(f"Loading reference:  {ref_path}\n")
+            self._log(f"Loading reference:  {os.path.basename(ref_path)}\n")
             ref = load_rtdose(ref_path)
             self._log(f"  {ref}\n")
 
-            self._log(f"Loading evaluation: {eval_path}\n")
+            self._log(f"Loading evaluation: {os.path.basename(eval_path)}\n")
             evl = load_rtdose(eval_path)
             self._log(f"  {evl}\n\n")
 

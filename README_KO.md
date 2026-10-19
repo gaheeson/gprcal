@@ -4,6 +4,8 @@
 
 GitHub: https://github.com/gaheeson/gprcal
 
+![GPRCal screenshot](docs/screenshot.png)
+
 **알고리즘**: Low et al. (1998) Med. Phys. 25:656-661
 
 ```
