@@ -16,6 +16,9 @@ env/
 *.pdf
 *.svg
 
+# Exception: docs screenshots
+!docs/*.png
+
 # DICOM data (may contain PHI)
 *.dcm
 
