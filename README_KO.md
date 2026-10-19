@@ -2,6 +2,8 @@
 
 **Gamma Pass Rate Calculator** — DICOM RT Dose 파일을 위한 감마 인덱스 계산기입니다.
 
+GitHub: https://github.com/gaheeson/gprcal
+
 **알고리즘**: Low et al. (1998) Med. Phys. 25:656-661
 
 ```

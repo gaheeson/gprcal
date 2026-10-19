@@ -2,6 +2,8 @@
 
 **Gamma Pass Rate Calculator** — standalone gamma index calculator for DICOM RT Dose files.
 
+GitHub: https://github.com/gaheeson/gprcal
+
 **Algorithm**: Low et al. (1998) Med. Phys. 25:656-661
 
 ```
